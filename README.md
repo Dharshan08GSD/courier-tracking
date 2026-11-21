@@ -1,7 +1,7 @@
 # SwiftTrack: Courier and Parcel Tracking Management System
 ### Academic Assessment Project — Scenario 26 (Register No: 732925ITR026)
 
-[![Live Web Application](https://img.shields.io/badge/Live%20Website-24%2F7%20GitHub%20Pages-22c55e?style=for-the-badge&logo=github)](https://dharshan-vcet.github.io/courier-parcel-tracking/)
+[![Live Web Application](https://img.shields.io/badge/Live%20Website-24%2F7%20GitHub%20Pages-22c55e?style=for-the-badge&logo=github)](https://Dharshan08GSD.github.io/courier-tracking/)
 [![Academic Year](https://img.shields.io/badge/Academic%20Year-2026--27%20(ODD)-0284c7?style=for-the-badge)](https://vcet.ac.in)
 [![Department](https://img.shields.io/badge/Department-Information%20Technology-8b5cf6?style=for-the-badge)](https://vcet.ac.in)
 
@@ -140,13 +140,14 @@ git init
 git add .
 git commit -m "Initial release of Scenario 26 Courier System - Dharshan S (732925ITR026)"
 git branch -M main
-git remote add origin https://github.com/<your-github-username>/<your-repo-name>.git
+git remote add origin https://github.com/Dharshan08GSD/courier-tracking.git
 git push -u origin main
 ```
-1. Go to your repository on GitHub.
+1. Go to your repository on GitHub: https://github.com/Dharshan08GSD/courier-tracking
 2. Click **Settings** $\rightarrow$ **Pages** (in the left sidebar).
 3. Under **Branch**, select `main` and folder `/ (root)`.
-4. Click **Save**. Your site is now live 24/7!
+4. Click **Save**. Your site goes live 24/7 at:
+   **https://Dharshan08GSD.github.io/courier-tracking/**
 
 ---
 
