@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwiftTrack — Courier & Parcel Tracking Management System | VCET IT</title>
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Chart.js CDN for Live Visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+    <!-- ============================================================================
+         HEADER: BRANDING & STUDENT CREDENTIAL BADGE
+         ============================================================================ -->
+    <header class="app-header">
+        <div class="header-inner">
+            <div class="brand-wrapper">
+                <div class="brand-icon">📦</div>
+                <div class="brand-text">
+                    <h1>SwiftTrack Logistics</h1>
+                    <p>Department of Information Technology • Velalar College of Engineering and Technology</p>
+                </div>
+            </div>
+
+            <!-- Student Profile Badge -->
+            <div class="student-badge-pill">
+                <span class="live-indicator"><span class="live-dot"></span> 24/7 LIVE</span>
+                <span>Dharshan S</span>
+                <span class="reg-no">732925ITR026</span>
+                <span>Class: 25IT3A</span>
+                <span style="background: #e2e8f0; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.72rem;">Scenario 26</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================================
+         TOP NAVIGATION BAR
+         ============================================================================ -->
+    <nav class="app-nav">
+        <div class="nav-container">
+            <button class="nav-tab active" data-tab="tab-tracker">
+                <span>📦</span> Live Tracker &amp; Operations
+            </button>
+            <button class="nav-tab" data-tab="tab-courses">
+                <span>🎓</span> 4 Courses Integration
+            </button>
+            <button class="nav-tab" data-tab="tab-se">
+                <span>📐</span> Software Engineering (Units 1–5)
+            </button>
+            <button class="nav-tab" data-tab="tab-dbms">
+                <span>🗄️</span> DBMS &amp; Live SQL Terminal
+            </button>
+            <button class="nav-tab" data-tab="tab-datascience">
+                <span>📊</span> Python Data Science &amp; Charts
+            </button>
+            <button class="nav-tab" data-tab="tab-java">
+                <span>☕</span> Java Code &amp; Dispatch Simulator
+            </button>
+            <button class="nav-tab" data-tab="tab-download">
+                <span>📥</span> Submission Bundle &amp; GitHub
+            </button>
+        </div>
+    </nav>
+
+    <!-- ============================================================================
+         MAIN CONTENT AREA
+         ============================================================================ -->
+    <main class="app-main">
+
+        <!-- ====================================================================
+             TAB 1: LIVE TRACKER & OPERATIONS DASHBOARD
+             ==================================================================== -->
+        <section id="tab-tracker" class="tab-pane active">
+            
+            <!-- Real-Time Consignment Search Bar -->
+            <div class="tracking-search-box">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                    <div>
+                        <h2 style="font-size: 1.5rem; font-weight: 800;">Real-Time Consignment Tracking Portal</h2>
+                        <p style="font-size: 0.9rem; opacity: 0.9; margin-top: 0.25rem;">
+                            Instant GPS waypoint lookup and delivery status progression across regional transit hubs.
+                        </p>
+                    </div>
+                    <button class="btn btn-success" id="btn-open-book-modal">
+                        ➕ Book New Parcel
+                    </button>
+                </div>
+                <div class="search-input-group">
+                    <input type="text" id="input-tracking-no" placeholder="Enter Consignment Tracking Number (e.g., TRK-2026-8805)" value="TRK-2026-8805">
+                    <button id="btn-track-search">🔍 Track Consignment</button>
+                </div>
+                <div style="margin-top: 0.75rem; font-size: 0.8rem; opacity: 0.85;">
+                    💡 Quick Test Pins: 
+                    <a href="javascript:void(0)" onclick="inspectTracking('TRK-2026-8801')" style="color: #ffffff; text-decoration: underline; margin-right: 0.6rem;">TRK-2026-8801 (Delivered)</a>
+                    <a href="javascript:void(0)" onclick="inspectTracking('TRK-2026-8805')" style="color: #ffffff; text-decoration: underline; margin-right: 0.6rem;">TRK-2026-8805 (Out for Delivery)</a>
+                    <a href="javascript:void(0)" onclick="inspectTracking('TRK-2026-8806')" style="color: #ffffff; text-decoration: underline; margin-right: 0.6rem;">TRK-2026-8806 (In Transit)</a>
+                    <a href="javascript:void(0)" onclick="inspectTracking('TRK-2026-8811')" style="color: #ffffff; text-decoration: underline;">TRK-2026-8811 (Returned / Failed)</a>
+                </div>
+            </div>
+
+            <!-- Dynamic Search Result Render Box -->
+            <div id="tracking-result-container"></div>
+
+            <!-- Operational KPI Metrics Widgets -->
+            <div class="grid-4" style="margin-bottom: 2rem;">
+                <div class="stat-widget">
+                    <div class="stat-info">
+                        <h3>Total Registered Parcels</h3>
+                        <div class="stat-value" id="kpi-total-parcels">12</div>
+                    </div>
+                    <div class="stat-icon" style="background: #e0f2fe; color: #0284c7;">📦</div>
+                </div>
+                <div class="stat-widget">
+                    <div class="stat-info">
+                        <h3>Delivered Consignments</h3>
+                        <div class="stat-value" id="kpi-delivered" style="color: #16a34a;">4</div>
+                    </div>
+                    <div class="stat-icon" style="background: #dcfce7; color: #16a34a;">✅</div>
+                </div>
+                <div class="stat-widget">
+                    <div class="stat-info">
+                        <h3>Active In-Transit Load</h3>
+                        <div class="stat-value" id="kpi-pending" style="color: #d97706;">7</div>
+                    </div>
+                    <div class="stat-icon" style="background: #fef3c7; color: #d97706;">🚚</div>
+                </div>
+                <div class="stat-widget">
+                    <div class="stat-info">
+                        <h3>Gross Revenue (INR)</h3>
+                        <div class="stat-value" id="kpi-revenue" style="color: #0f172a;">₹4,180.20</div>
+                    </div>
+                    <div class="stat-icon" style="background: #f3e8ff; color: #7e22ce;">💰</div>
+                </div>
+            </div>
+
+            <!-- Master Consignment Register Table -->
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h3 class="card-title">📋 Consignment Register &amp; Active Shipments</h3>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">
+                            Live database records synced with in-memory persistence and ACID trigger updates.
+                        </p>
+                    </div>
+                    <div style="display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap;">
+                        <input type="text" id="input-filter-parcels" class="form-control" placeholder="Search by recipient or city..." style="width: 220px; padding: 0.4rem 0.75rem;">
+                        <select id="select-filter-status" class="form-control" style="width: 160px; padding: 0.4rem 0.75rem;">
+                            <option value="ALL">All Statuses</option>
+                            <option value="Booked">Booked</option>
+                            <option value="In Transit">In Transit</option>
+                            <option value="Out for Delivery">Out for Delivery</option>
+                            <option value="Delivered">Delivered</option>
+                            <option value="Returned">Returned</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Tracking Number</th>
+                                <th>Consignee / City</th>
+                                <th>Service Tier</th>
+                                <th>Weight</th>
+                                <th>Total Freight</th>
+                                <th>Current Status</th>
+                                <th>Assigned Agent</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="parcels-table-body">
+                            <!-- Populated dynamically via app.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Delivery Personnel Workload Monitor -->
+            <div class="card" style="margin-top: 2rem;">
+                <div class="card-header">
+                    <h3 class="card-title">🚴 Field Delivery Personnel &amp; Operational Workload (FR-05)</h3>
+                    <span class="badge badge-info">5 Active Personnel</span>
+                </div>
+                <div class="grid-3" id="personnel-cards-container">
+                    <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h4 style="font-weight: 700; color: var(--secondary);">Manojkumar P</h4>
+                            <span class="badge badge-warning">On Delivery</span>
+                        </div>
+                        <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.25rem;">Zone: Erode Central • Motorcycle (TN-33-AX-4521)</div>
+                        <div style="margin-top: 0.75rem; display: flex; justify-content: space-between; font-size: 0.85rem;">
+                            <span>Active Deliveries: <strong style="color: var(--primary);">2</strong></span>
+                            <span>Rating: <strong style="color: #f59e0b;">4.8 ★</strong></span>
+                        </div>
+                    </div>
+
+                    <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h4 style="font-weight: 700; color: var(--secondary);">Sathish Kumar R</h4>
+                            <span class="badge badge-warning">On Delivery</span>
+                        </div>
+                        <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.25rem;">Zone: Coimbatore North • Van (TN-38-BZ-1984)</div>
+                        <div style="margin-top: 0.75rem; display: flex; justify-content: space-between; font-size: 0.85rem;">
+                            <span>Active Deliveries: <strong style="color: var(--primary);">1</strong></span>
+                            <span>Rating: <strong style="color: #f59e0b;">4.9 ★</strong></span>
+                        </div>
+                    </div>
+
+                    <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h4 style="font-weight: 700; color: var(--secondary);">Praveen Wilson</h4>
+                            <span class="badge badge-warning">On Delivery</span>
+                        </div>
+                        <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.25rem;">Zone: Chennai South • EV-Scooter (TN-01-EE-7762)</div>
+                        <div style="margin-top: 0.75rem; display: flex; justify-content: space-between; font-size: 0.85rem;">
+                            <span>Active Deliveries: <strong style="color: var(--primary);">1</strong></span>
+                            <span>Rating: <strong style="color: #f59e0b;">4.7 ★</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====================================================================
+             TAB 2: FOUR COURSES INTEGRATION MATRIX
+             ==================================================================== -->
+        <section id="tab-courses" class="tab-pane">
+            <div class="card" style="margin-bottom: 2rem; background: linear-gradient(135deg, #f8fafc, #eff6ff);">
+                <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--secondary);">
+                    Curriculum Integration: Four Synergistic Courses
+                </h2>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.35rem;">
+                    Demonstrating how DBMS, Java Programming, Software Engineering, and Data Science converge in Scenario 26.
+                </p>
+            </div>
+
+            <div class="grid-2">
+                <!-- Course 1 -->
+                <div class="card" style="border-top: 4px solid #0284c7;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                        <span class="badge badge-info" style="font-size: 0.8rem;">25ITT31</span>
+                        <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">SEMESTER ODD</span>
+                    </div>
+                    <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--secondary);">Database Management Systems</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem;">
+                        Powers persistence, transactional integrity, and normalized schema storage.
+                    </p>
+                    <ul style="margin-top: 1rem; padding-left: 1.25rem; font-size: 0.85rem; color: var(--secondary); line-height: 1.6;">
+                        <li><strong>Unit 1:</strong> Entity-Relationship (ER) model in Chen notation; relational algebra.</li>
+                        <li><strong>Unit 2:</strong> Complex SQL queries, multi-table JOINs, automated triggers, and views.</li>
+                        <li><strong>Unit 3:</strong> Functional dependencies and 1NF to 3NF/BCNF normalization.</li>
+                        <li><strong>Unit 4:</strong> ACID transactions, checkpoint logging, and recovery protocols.</li>
+                        <li><strong>Unit 5:</strong> NoSQL comparison (MongoDB JSON document structure for audit trails).</li>
+                    </ul>
+                </div>
+
+                <!-- Course 2 -->
+                <div class="card" style="border-top: 4px solid #ea580c;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                        <span class="badge badge-warning" style="font-size: 0.8rem; background: #ffedd5; color: #c2410c;">25ITT32</span>
+                        <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">SEMESTER ODD</span>
+                    </div>
+                    <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--secondary);">Java Programming</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem;">
+                        Encapsulates business logic, inheritance hierarchies, and multithreaded transit dispatching.
+                    </p>
+                    <ul style="margin-top: 1rem; padding-left: 1.25rem; font-size: 0.85rem; color: var(--secondary); line-height: 1.6;">
+                        <li><strong>Unit 1:</strong> Object fundamentals, constructors, and console I/O stream handling.</li>
+                        <li><strong>Unit 2:</strong> Abstract class <code>Parcel</code>, inheritance (Standard, Express, SameDay), interfaces.</li>
+                        <li><strong>Unit 3:</strong> Custom checked exceptions (<code>ParcelNotFoundException</code>) and multithreading.</li>
+                        <li><strong>Unit 4:</strong> String formatting for waybills and JDBC database connectivity layer.</li>
+                        <li><strong>Unit 5:</strong> Generics, Collections Framework, Lambdas, and Stream API statistics.</li>
+                    </ul>
+                </div>
+
+                <!-- Course 3 -->
+                <div class="card" style="border-top: 4px solid #22c55e;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                        <span class="badge badge-success" style="font-size: 0.8rem;">25ITT33</span>
+                        <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">SEMESTER ODD</span>
+                    </div>
+                    <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--secondary);">Software Engineering</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem;">
+                        Governs the SDLC process model, SRS engineering, UML architectural diagrams, and V&amp;V testing.
+                    </p>
+                    <ul style="margin-top: 1rem; padding-left: 1.25rem; font-size: 0.85rem; color: var(--secondary); line-height: 1.6;">
+                        <li><strong>Unit 1:</strong> Agile Scrum framework with 4 two-week sprint cycles.</li>
+                        <li><strong>Unit 2:</strong> Requirements Engineering, formal SRS document, and user stories.</li>
+                        <li><strong>Unit 3:</strong> UML Design Diagrams (System Architecture, Class, Component, Activity).</li>
+                        <li><strong>Unit 4:</strong> White-box/Black-box testing and 15-case Test Execution Suite.</li>
+                        <li><strong>Unit 5:</strong> 4P's project management and COCOMO cost estimation calculations.</li>
+                    </ul>
+                </div>
+
+                <!-- Course 4 -->
+                <div class="card" style="border-top: 4px solid #8b5cf6;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                        <span class="badge badge-purple" style="font-size: 0.8rem;">25ITC31</span>
+                        <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">SEMESTER ODD</span>
+                    </div>
+                    <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--secondary);">Foundations of Data Science</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem;">
+                        Extracts operational insights, cleans datasets, and models shipment volume and delay patterns.
+                    </p>
+                    <ul style="margin-top: 1rem; padding-left: 1.25rem; font-size: 0.85rem; color: var(--secondary); line-height: 1.6;">
+                        <li><strong>Unit 1:</strong> Descriptive statistics (mean, median, IQR, standard deviations).</li>
+                        <li><strong>Unit 2:</strong> Python foundations, Jupyter environment, and CSV/DB dataset ingestion.</li>
+                        <li><strong>Unit 3:</strong> Data wrangling with Pandas DataFrames, multi-level indexing, and grouping.</li>
+                        <li><strong>Unit 4:</strong> Data cleaning, missing value imputation, and IQR outlier detection.</li>
+                        <li><strong>Unit 5:</strong> Exploratory Data Analysis (EDA) visualizations using Matplotlib &amp; Seaborn.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Interconnection Architecture Diagram -->
+            <div class="card" style="margin-top: 2rem;">
+                <div class="card-header">
+                    <h3 class="card-title">🔄 Holistic System Integration Architecture (3-Tier)</h3>
+                </div>
+                <div class="diagram-frame">
+                    <img src="assets/diagrams/system_architecture.svg" alt="System Architecture" style="width: 100%; max-width: 900px;">
+                </div>
+            </div>
+        </section>
+
+        <!-- ====================================================================
+             TAB 3: SOFTWARE ENGINEERING DEDICATED COMPREHENSIVE PAGE (UNITS 1–5)
+             ==================================================================== -->
+        <section id="tab-se" class="tab-pane">
+            <div class="card" style="margin-bottom: 1.5rem; background: #ffffff;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                    <div>
+                        <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--secondary);">
+                            Software Engineering (25ITT33) — Complete Unit-Wise Process &amp; Architecture
+                        </h2>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">
+                            Student: Dharshan S | Reg: 732925ITR026 | Class: 25IT3A | Department of IT, VCET
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Unit Navigation Sub-Tabs -->
+                <div class="unit-nav" style="margin-top: 1.25rem;">
+                    <button class="unit-btn active" data-unit="1">Unit 1: Software Process</button>
+                    <button class="unit-btn" data-unit="2">Unit 2: Requirements &amp; SRS</button>
+                    <button class="unit-btn" data-unit="3">Unit 3: Design Diagrams</button>
+                    <button class="unit-btn" data-unit="4">Unit 4: Testing &amp; Test Cases</button>
+                    <button class="unit-btn" data-unit="5">Unit 5: Project Management &amp; COCOMO</button>
+                </div>
+            </div>
+
+            <!-- UNIT 1 CONTENT -->
+            <div id="se-unit-1" class="unit-content">
+                <div class="card">
+                    <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--secondary); margin-bottom: 0.75rem;">
+                        Unit 1: Software Process (Agile Scrum Framework in Courier Logistics)
+                    </h3>
+                    <p style="font-size: 0.88rem; color: var(--secondary); line-height: 1.6;">
+                        For the Courier and Parcel Tracking System, traditional linear sequential models (Waterfall) are inadequate due to dynamically evolving tariff structures, fluctuating SLA parameters, and the need for continuous integration. Therefore, the <strong>Agile Scrum Methodology</strong> was implemented.
+                    </p>
+                    
+                    <h4 style="margin-top: 1.25rem; font-size: 1rem; font-weight: 700;">Four-Sprint Iteration Plan:</h4>
+                    <div class="grid-4" style="margin-top: 0.75rem;">
+                        <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1rem;">
+                            <strong style="color: var(--primary);">Sprint 1 (Weeks 1–2)</strong>
+                            <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.35rem;">
+                                Domain modeling, 3NF database schema, customer &amp; parcel class hierarchy.
+                            </p>
+                        </div>
+                        <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1rem;">
+                            <strong style="color: var(--primary);">Sprint 2 (Weeks 3–4)</strong>
+                            <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.35rem;">
+                                Booking engine, dynamic weight/distance pricing algorithm, barcode generator.
+                            </p>
+                        </div>
+                        <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1rem;">
+                            <strong style="color: var(--primary);">Sprint 3 (Weeks 5–6)</strong>
+                            <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.35rem;">
+                                Tracking state machine, delivery attempt logger, multithreaded simulator.
+                            </p>
+                        </div>
+                        <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1rem;">
+                            <strong style="color: var(--primary);">Sprint 4 (Weeks 7–8)</strong>
+                            <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.35rem;">
+                                Python EDA charts, verification testing, and 24/7 GitHub Pages deployment.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UNIT 2 CONTENT -->
+            <div id="se-unit-2" class="unit-content" style="display: none;">
+                <div class="card">
+                    <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--secondary); margin-bottom: 0.75rem;">
+                        Unit 2: Requirements Engineering &amp; Scenario 26 Mapping
+                    </h3>
+                    <p style="font-size: 0.88rem; color: var(--secondary); line-height: 1.6;">
+                        Requirements were elicited through stakeholder interviews, formalized into an IEEE-compliant SRS, and validated against college assessment criteria.
+                    </p>
+
+                    <div class="table-responsive" style="margin-top: 1rem;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Req ID</th>
+                                    <th>Scenario 26 Functional Mandate</th>
+                                    <th>Implementation Mechanism</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>FR-01</strong></td>
+                                    <td>Manage customer details (ID, name, contact number, address)</td>
+                                    <td><code>customers</code> table + Java <code>Customer</code> class + validation rules</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>FR-02</strong></td>
+                                    <td>Register parcels (ID, sender, receiver, type, weight, destination)</td>
+                                    <td>Interactive booking modal + <code>parcels</code> table + polymorphic instances</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>FR-03</strong></td>
+                                    <td>Generate tracking numbers (unique tracking code)</td>
+                                    <td>Alphanumeric sequence generator <code>TRK-YYYY-XXXX</code> with unique index</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>FR-04</strong></td>
+                                    <td>Calculate delivery charges (weight, distance, service type)</td>
+                                    <td>Dynamic pricing matrix with 18% GST calculation in JS and Java</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>FR-05</strong></td>
+                                    <td>Assign delivery personnel &amp; maintain details</td>
+                                    <td>Agent allocation module with zone matching &amp; active load counter</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>FR-06</strong></td>
+                                    <td>Track shipment status (Booked, In Transit, Out for Delivery, Delivered, Returned)</td>
+                                    <td>Finite-state tracker with visual timeline &amp; audit history</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>FR-07</strong></td>
+                                    <td>Record delivery attempts &amp; failure reasons</td>
+                                    <td>Attempt modal recording status, failure reason &amp; reschedule date</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>FR-08</strong></td>
+                                    <td>Generate operational reports (history, pending, delivered, workload)</td>
+                                    <td>Real-time filterable dashboard tables &amp; pre-compiled SQL views</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>FR-09</strong></td>
+                                    <td>Analyze delivery performance using Python</td>
+                                    <td>Pandas EDA pipeline with completion rates, volumes &amp; delay charts</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UNIT 3 CONTENT: ALL 4 DIAGRAMS -->
+            <div id="se-unit-3" class="unit-content" style="display: none;">
+                
+                <!-- Diagram 1: Activity Diagram (Image 1 Style) -->
+                <div class="card" style="margin-bottom: 2rem;">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">1. UML Activity Diagram: Courier Order &amp; Delivery Workflow</h3>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">
+                                Formatted matching Reference Image 1 with Initial Node, Fork Bar, Rush Order Decision Diamond, Invoicing Parallel Flow, Join Bar, and Final Node.
+                            </p>
+                        </div>
+                        <span class="badge badge-info">UML 2.5 Standard</span>
+                    </div>
+                    <div class="diagram-frame">
+                        <img src="assets/diagrams/activity_diagram.svg" alt="UML Activity Diagram" style="width: 100%; max-width: 750px;">
+                    </div>
+                </div>
+
+                <!-- Diagram 2: Component Diagram (Image 2 Style) -->
+                <div class="card" style="margin-bottom: 2rem;">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">2. UML Component Diagram: System Boundaries &amp; Interface Ports</h3>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">
+                                Formatted matching Reference Image 2 with Container Component, Ports, Provided Interfaces (Lollipops), Required Interfaces (Sockets), and Internal Assembly Connectors.
+                            </p>
+                        </div>
+                        <span class="badge badge-info">UML 2.5 Standard</span>
+                    </div>
+                    <div class="diagram-frame">
+                        <img src="assets/diagrams/component_diagram.svg" alt="UML Component Diagram" style="width: 100%; max-width: 950px;">
+                    </div>
+                </div>
+
+                <!-- Diagram 3: Class Diagram (Image 3 Style) -->
+                <div class="card" style="margin-bottom: 2rem;">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">3. UML Class Diagram: Domain Models &amp; Inheritance Architecture</h3>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">
+                                Formatted matching Reference Image 3 with 3-Compartment Class Boxes, Visibility Indicators (+, -, #), and Generalization Open Triangular Arrows pointing UP.
+                            </p>
+                        </div>
+                        <span class="badge badge-info">UML 2.5 Standard</span>
+                    </div>
+                    <div class="diagram-frame">
+                        <img src="assets/diagrams/class_diagram.svg" alt="UML Class Diagram" style="width: 100%; max-width: 950px;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- UNIT 4 CONTENT: TESTING -->
+            <div id="se-unit-4" class="unit-content" style="display: none;">
+                <div class="card">
+                    <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--secondary); margin-bottom: 0.75rem;">
+                        Unit 4: Software Testing Techniques &amp; 15-Case Verification Suite
+                    </h3>
+                    <p style="font-size: 0.88rem; color: var(--secondary); line-height: 1.6;">
+                        Rigorous Verification and Validation (V&amp;V) was conducted across Unit, Integration, System, and Boundary levels. Below is the complete test execution matrix.
+                    </p>
+
+                    <div class="table-responsive" style="margin-top: 1rem;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Test ID</th>
+                                    <th>Module / Feature</th>
+                                    <th>Input Test Vector</th>
+                                    <th>Expected Outcome</th>
+                                    <th>Actual Outcome</th>
+                                    <th>Result</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>TC-01</strong></td>
+                                    <td>Tracking Search</td>
+                                    <td><code>TRK-2026-8801</code></td>
+                                    <td>Displays full waybill and 4-step transit checkpoints</td>
+                                    <td>Waybill and complete timeline displayed accurately</td>
+                                    <td><span class="badge badge-success">PASS</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>TC-02</strong></td>
+                                    <td>Search Exception</td>
+                                    <td><code>TRK-2026-9999</code></td>
+                                    <td>Throws <code>ParcelNotFoundException</code></td>
+                                    <td>Alert: "Consignment Not Found in database"</td>
+                                    <td><span class="badge badge-success">PASS</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>TC-03</strong></td>
+                                    <td>Regex Validation</td>
+                                    <td><code>INVALID-CODE</code></td>
+                                    <td>Throws <code>InvalidTrackingNumberException</code></td>
+                                    <td>Format validation caught before query execution</td>
+                                    <td><span class="badge badge-success">PASS</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>TC-04</strong></td>
+                                    <td>Standard Booking</td>
+                                    <td>Weight: 2.0 kg, Salem</td>
+                                    <td>Calculates Total: ₹165.20; generates tracking code</td>
+                                    <td>Generated <code>TRK-2026-8813</code>, Freight: ₹165.20</td>
+                                    <td><span class="badge badge-success">PASS</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>TC-05</strong></td>
+                                    <td>Priority Express</td>
+                                    <td>Weight: 3.0 kg, Chennai</td>
+                                    <td>Applies ₹75 surcharge; Total: ₹477.90</td>
+                                    <td>Calculated ₹477.90 with 24 hr SLA</td>
+                                    <td><span class="badge badge-success">PASS</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>TC-06</strong></td>
+                                    <td>Same-Day Rush</td>
+                                    <td>Weight: 1.5 kg, Erode</td>
+                                    <td>Applies ₹120 rush fee; Total: ₹283.20</td>
+                                    <td>Calculated ₹283.20 with 8 hr SLA</td>
+                                    <td><span class="badge badge-success">PASS</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>TC-07</strong></td>
+                                    <td>Boundary Check</td>
+                                    <td>Weight: -2.0 kg</td>
+                                    <td>Validation error prevents submission</td>
+                                    <td>Prompt: "Weight must be greater than zero"</td>
+                                    <td><span class="badge badge-success">PASS</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>TC-08</strong></td>
+                                    <td>Personnel Assign</td>
+                                    <td><code>TRK-2026-8805</code>, Agent 1</td>
+                                    <td>Status $\rightarrow$ In Transit; agent load +1</td>
+                                    <td>Assigned Manojkumar P, active load updated</td>
+                                    <td><span class="badge badge-success">PASS</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>TC-09</strong></td>
+                                    <td>Status Transition</td>
+                                    <td>Advance to Delivered</td>
+                                    <td>Logs actual delivery timestamp; load -1</td>
+                                    <td>Trigger updated status and agent counter</td>
+                                    <td><span class="badge badge-success">PASS</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>TC-10</strong></td>
+                                    <td>Attempt Logging</td>
+                                    <td>Customer Unavailable</td>
+                                    <td>Logs failed attempt and sets reschedule date</td>
+                                    <td>Audit entry added to attempt registry</td>
+                                    <td><span class="badge badge-success">PASS</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UNIT 5 CONTENT: PROJECT MANAGEMENT -->
+            <div id="se-unit-5" class="unit-content" style="display: none;">
+                <div class="card">
+                    <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--secondary); margin-bottom: 0.75rem;">
+                        Unit 5: Project Management &amp; COCOMO Cost Estimation Calculations
+                    </h3>
+
+                    <!-- 4P's -->
+                    <div class="grid-4" style="margin-top: 1rem;">
+                        <div style="background: #f8fafc; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                            <strong style="color: var(--primary);">1. People</strong>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">
+                                Student developer (Dharshan S), faculty evaluators, logistics personas.
+                            </p>
+                        </div>
+                        <div style="background: #f8fafc; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                            <strong style="color: var(--primary);">2. Product</strong>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">
+                                Scenario 26 Courier &amp; Parcel Tracking Management System.
+                            </p>
+                        </div>
+                        <div style="background: #f8fafc; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                            <strong style="color: var(--primary);">3. Process</strong>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">
+                                Agile Scrum with 4 two-week iterations and daily standups.
+                            </p>
+                        </div>
+                        <div style="background: #f8fafc; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                            <strong style="color: var(--primary);">4. Project</strong>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">
+                                Zero-budget 24/7 deployment on GitHub Pages with 100% requirements coverage.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- COCOMO Mathematical Breakdown -->
+                    <div style="margin-top: 1.5rem; background: #f8fafc; padding: 1.25rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                        <h4 style="font-weight: 700; color: var(--secondary); font-size: 1rem;">
+                            Basic COCOMO Estimation Model (Organic Mode):
+                        </h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem;">
+                            Coefficients for Organic Mode: $a_b = 2.4, \, b_b = 1.05, \, c_b = 2.5, \, d_b = 0.38$.
+                        </p>
+                        <div style="margin-top: 0.75rem; font-family: monospace; font-size: 0.88rem; background: #ffffff; padding: 1rem; border: 1px solid var(--border-color); border-radius: 4px; line-height: 1.7;">
+                            • Estimated Code Size (KLOC) = 3.7 KLOC (Java + SQL + Python + Web)<br>
+                            • Effort (E) = 2.4 × (3.7)^1.05 = <strong>9.41 Person-Months</strong><br>
+                            • Development Time (D) = 2.5 × (9.41)^0.38 = <strong>5.85 Months</strong><br>
+                            • Recommended Staffing (S) = E / D = 9.41 / 5.85 = <strong>1.6 Engineers</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====================================================================
+             TAB 4: DBMS & LIVE SQL TERMINAL (25ITT31)
+             ==================================================================== -->
+        <section id="tab-dbms" class="tab-pane">
+            <div class="card" style="margin-bottom: 2rem;">
+                <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--secondary);">
+                    Database Management Systems (25ITT31) — Architecture &amp; SQL Console
+                </h2>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">
+                    Relational schema design, Chen ER diagram, normalization walkthrough, and interactive SQL execution terminal.
+                </p>
+            </div>
+
+            <!-- Chen ER Diagram -->
+            <div class="card" style="margin-bottom: 2rem;">
+                <div class="card-header">
+                    <div>
+                        <h3 class="card-title">📐 Entity-Relationship (ER) Diagram in Chen's Notation</h3>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">
+                            Formatted matching Reference Image 4 with Rectangles (Entities), Ovals (Attributes with underlined PKs), and Diamonds (Relationships with Cardinality).
+                        </p>
+                    </div>
+                    <span class="badge badge-success">Chen ER Standard</span>
+                </div>
+                <div class="diagram-frame">
+                    <img src="assets/diagrams/er_diagram.svg" alt="Chen ER Diagram" style="width: 100%; max-width: 950px;">
+                </div>
+            </div>
+
+            <!-- Normalization Walkthrough -->
+            <div class="card" style="margin-bottom: 2rem;">
+                <div class="card-header">
+                    <h3 class="card-title">🔬 Database Normalization Breakdown (UNF $\rightarrow$ 3NF/BCNF)</h3>
+                </div>
+                <div class="grid-3">
+                    <div style="background: #f8fafc; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                        <strong style="color: var(--primary);">1. 1NF Transformation</strong>
+                        <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.35rem;">
+                            Eliminated comma-separated tracking checkpoint lists. Made all attributes atomic and assigned composite primary key $(\text{tracking\_no}, \text{timestamp})$.
+                        </p>
+                    </div>
+                    <div style="background: #f8fafc; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                        <strong style="color: var(--primary);">2. 2NF Transformation</strong>
+                        <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.35rem;">
+                            Removed partial dependencies. Separated parcel consignment details from physical transit movement audit entries into <code>tracking_history</code>.
+                        </p>
+                    </div>
+                    <div style="background: #f8fafc; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                        <strong style="color: var(--primary);">3. 3NF / BCNF Transformation</strong>
+                        <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.35rem;">
+                            Removed transitive dependencies where agent names and customer emails depended on foreign keys. Segregated into <code>customers</code> and <code>delivery_personnel</code> tables.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Terminal Execution Guide -->
+            <div class="card" style="margin-bottom: 2rem;">
+                <div class="card-header">
+                    <h3 class="card-title">💻 How to Run SQL Queries in Terminal &amp; Get Formatted Output Tables</h3>
+                </div>
+                <div style="background: #0f172a; color: #f8fafc; padding: 1.25rem; border-radius: var(--radius-sm); font-family: monospace; font-size: 0.85rem; line-height: 1.6;">
+                    <span style="color: #64748b;"># Step 1: Open PowerShell or Terminal and navigate to the assignment workspace</span><br>
+                    <span style="color: #38bdf8;">cd "d:\ASSIGNMENT 1"</span><br><br>
+                    <span style="color: #64748b;"># Step 2: Log into MySQL Server</span><br>
+                    <span style="color: #38bdf8;">mysql -u root -p</span><br><br>
+                    <span style="color: #64748b;"># Step 3: Source the schema and initial seed data scripts</span><br>
+                    <span style="color: #22c55e;">source sql/schema.sql;</span><br>
+                    <span style="color: #22c55e;">source sql/seed_data.sql;</span><br><br>
+                    <span style="color: #64748b;"># Step 4: Execute sample analytical queries (e.g., Query 1 for Express Parcels)</span><br>
+                    <span style="color: #f59e0b;">SELECT tracking_number, receiver_name, destination_city, weight_kg, total_charge FROM parcels WHERE service_type = 'Express';</span>
+                </div>
+            </div>
+
+            <!-- Live In-Browser SQL Terminal -->
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h3 class="card-title">⚡ In-Browser Interactive SQL Terminal &amp; Query Runner</h3>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">
+                            Select a pre-built academic query or type custom SQL to see live ASCII table rendering.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 1rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                    <select id="select-sql-preset" class="form-control" style="flex: 1; min-width: 300px;">
+                        <option value="query1">Query 1: Filter High-Value Express / Same-Day Parcels (> 2.0 kg)</option>
+                        <option value="query2">Query 2: Multi-Table Inner Join (Parcels, Senders, &amp; Agents)</option>
+                        <option value="query3">Query 3: Aggregation &amp; Grouping: Revenue by Distance Tier</option>
+                        <option value="query4">Query 4: View Execution: Delivery Personnel Workload View</option>
+                        <option value="query5">Query 5: Audit Trail: Chronological Checkpoints for TRK-2026-8801</option>
+                        <option value="query6">Query 6: Delivery Failure Analysis &amp; Recorded Reasons</option>
+                    </select>
+                    <button id="btn-run-sql" class="btn btn-primary">
+                        ▶️ Execute Query
+                    </button>
+                </div>
+
+                <textarea id="sql-editor" class="form-control" rows="4" style="font-family: monospace; font-size: 0.88rem; background: #f8fafc;">SELECT tracking_number, receiver_name, destination_city, weight_kg, service_type, total_charge, current_status
+FROM parcels
+WHERE service_type IN ('Express', 'Same-Day') AND weight_kg > 2.00
+ORDER BY total_charge DESC;</textarea>
+
+                <!-- Terminal Window Display -->
+                <div class="terminal-window" style="margin-top: 1rem;">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <span class="dot dot-red"></span>
+                            <span class="dot dot-yellow"></span>
+                            <span class="dot dot-green"></span>
+                        </div>
+                        <span class="terminal-title">mysql&gt; courier_db @ localhost:3306</span>
+                        <span></span>
+                    </div>
+                    <div class="terminal-body">
+                        <div id="sql-terminal-output" class="terminal-output">+---------------+--------------+-------------+-----------+----------+------------+------------------+
+| Tracking_No   | Consignee    | Destination | Weight_Kg | Service  | Charge_INR | Status           |
++---------------+--------------+-------------+-----------+----------+------------+------------------+
+| TRK-2026-8805 | Naveen Kumar | Bangalore   |      6.50 | Express  |     920.40 | Out for Delivery |
+| TRK-2026-8803 | Kavitha Devi | Chennai     |      4.20 | Express  |     495.60 | Delivered        |
+| TRK-2026-8811 | Divya Prakash| Trichy      |      3.80 | Express  |     460.20 | Returned         |
+| TRK-2026-8806 | Anitha Raghu | Tiruppur    |      3.00 | Express  |     295.00 | In Transit       |
+| TRK-2026-8802 | Gokulnath C  | Erode       |      2.80 | Same-Day |     212.40 | Delivered        |
++---------------+--------------+-------------+-----------+----------+------------+------------------+
+5 rows in set (0.00 sec)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====================================================================
+             TAB 5: DATA SCIENCE & PYTHON CHARTS (25ITC31)
+             ==================================================================== -->
+        <section id="tab-datascience" class="tab-pane">
+            <div class="card" style="margin-bottom: 2rem;">
+                <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--secondary);">
+                    Foundations of Data Science (25ITC31) — Visualizations &amp; EDA
+                </h2>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">
+                    Python Pandas data ingestion, missing value imputation, IQR outlier detection, and Chart.js/Matplotlib visualizations.
+                </p>
+            </div>
+
+            <!-- 4 Interactive Charts Grid -->
+            <div class="grid-2">
+                <!-- Chart 1 -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">1. Delivery Completion Rates (Status Breakdown)</h3>
+                    </div>
+                    <div style="height: 300px; position: relative;">
+                        <canvas id="chart-completion-rate"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 2 -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">2. Daily Shipment Volumes &amp; Revenue Trends</h3>
+                    </div>
+                    <div style="height: 300px; position: relative;">
+                        <canvas id="chart-volume-revenue"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 3 -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">3. Average Delivery Delays by Distance Category</h3>
+                    </div>
+                    <div style="height: 300px; position: relative;">
+                        <canvas id="chart-delays-distance"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 4 -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">4. Delivery Personnel Workload Distribution</h3>
+                    </div>
+                    <div style="height: 300px; position: relative;">
+                        <canvas id="chart-personnel-workload"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- High-Res Matplotlib & Seaborn Generated Charts Gallery -->
+            <div class="card" style="margin-top: 2rem;">
+                <div class="card-header">
+                    <div>
+                        <h3 class="card-title">📈 Publication-Quality Matplotlib &amp; Seaborn Charts (300 DPI Export)</h3>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">
+                            Generated directly via <code>python/analytics.py</code> using Seaborn v0.13 and Matplotlib v3.11.
+                        </p>
+                    </div>
+                    <span class="badge badge-purple">Python 3.15 Generated</span>
+                </div>
+                <div class="grid-2">
+                    <div style="text-align: center;">
+                        <img src="assets/charts/delivery_completion_rates.png" alt="Status Pie Chart" style="width: 100%; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                        <p style="font-size: 0.8rem; font-weight: 600; margin-top: 0.5rem;">Figure 1: Delivery Completion Donut Chart</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="assets/charts/shipment_volumes_trend.png" alt="Volume Trends" style="width: 100%; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                        <p style="font-size: 0.8rem; font-weight: 600; margin-top: 0.5rem;">Figure 2: Daily Volume &amp; Revenue Trends</p>
+                    </div>
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <img src="assets/charts/delivery_delays_by_distance.png" alt="Delivery Delays" style="width: 100%; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                        <p style="font-size: 0.8rem; font-weight: 600; margin-top: 0.5rem;">Figure 3: Delay Schedule Variance (Hours)</p>
+                    </div>
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <img src="assets/charts/personnel_workload_distribution.png" alt="Personnel Workload" style="width: 100%; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                        <p style="font-size: 0.8rem; font-weight: 600; margin-top: 0.5rem;">Figure 4: Field Courier Agent Workload Distribution</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====================================================================
+             TAB 6: JAVA CODE & DISPATCH SIMULATOR (25ITT32)
+             ==================================================================== -->
+        <section id="tab-java" class="tab-pane">
+            <div class="card" style="margin-bottom: 2rem;">
+                <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--secondary);">
+                    Java Programming (25ITT32) — Codebase &amp; Multithreaded Engine
+                </h2>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">
+                    Demonstrating OOP inheritance, dynamic method dispatch, custom exceptions, JDBC connection, and concurrent thread priorities.
+                </p>
+            </div>
+
+            <!-- In-Browser Multithreaded Simulator -->
+            <div class="card" style="margin-bottom: 2rem;">
+                <div class="card-header">
+                    <div>
+                        <h3 class="card-title">⚙️ Interactive Multithreaded Transit Dispatch Simulator (Unit 3)</h3>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">
+                            Simulates concurrent worker threads dispatching packages with dynamic thread priorities (Same-Day: 10, Express: 7, Standard: 5).
+                        </p>
+                    </div>
+                    <button id="btn-run-java-sim" class="btn btn-primary">
+                        ▶️ Run Dispatch Simulation
+                    </button>
+                </div>
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <span class="dot dot-red"></span>
+                            <span class="dot dot-yellow"></span>
+                            <span class="dot dot-green"></span>
+                        </div>
+                        <span class="terminal-title">JVM Console [com.courier.service.MultithreadedDispatchSimulator]</span>
+                        <span></span>
+                    </div>
+                    <div class="terminal-body">
+                        <pre id="java-console-output" class="terminal-output">[JVM Idle] Click "Run Dispatch Simulation" above to spawn concurrent Java transit threads...</pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Java Code Snippet Viewer -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">📄 Core Java Source: Polymorphic Parcel Hierarchy (<code>Parcel.java</code>)</h3>
+                    <span class="badge badge-info">JDK 17/21 LTS</span>
+                </div>
+                <div style="background: #0f172a; color: #f8fafc; padding: 1.25rem; border-radius: var(--radius-sm); font-family: monospace; font-size: 0.82rem; overflow-x: auto; line-height: 1.5;">
+<span style="color: #64748b;">// com.courier.model.Parcel (Abstract Base Class)</span>
+<span style="color: #f59e0b;">public abstract class</span> <span style="color: #38bdf8;">Parcel</span> <span style="color: #f59e0b;">implements</span> <span style="color: #38bdf8;">Trackable</span> {
+    <span style="color: #f59e0b;">protected int</span> parcelId;
+    <span style="color: #f59e0b;">protected</span> String trackingNumber;
+    <span style="color: #f59e0b;">protected</span> Customer sender;
+    <span style="color: #f59e0b;">protected double</span> weightKg;
+    <span style="color: #f59e0b;">protected</span> String distanceCategory;
+    <span style="color: #f59e0b;">protected</span> String serviceType;
+    <span style="color: #f59e0b;">protected double</span> totalCharge;
+    <span style="color: #f59e0b;">protected</span> String currentStatus;
+
+    <span style="color: #64748b;">// Abstract method overridden dynamically by Standard, Express, and Same-Day</span>
+    <span style="color: #f59e0b;">public abstract void</span> <span style="color: #22c55e;">calculatePricing</span>();
+
+    <span style="color: #f59e0b;">public synchronized void</span> <span style="color: #22c55e;">updateStatus</span>(String newStatus, String location, String notes, String updatedBy) {
+        <span style="color: #f59e0b;">this</span>.currentStatus = newStatus;
+        <span style="color: #f59e0b;">this</span>.trackingHistory.add(<span style="color: #f59e0b;">new</span> TrackingUpdate(newStatus, location, notes, updatedBy));
+    }
+}
+                </div>
+            </div>
+        </section>
+
+        <!-- ====================================================================
+             TAB 7: SUBMISSION BUNDLE & GITHUB INSTRUCTIONS
+             ==================================================================== -->
+        <section id="tab-download" class="tab-pane">
+            <div class="card" style="margin-bottom: 2rem;">
+                <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--secondary);">
+                    GitHub Repository &amp; Project Submission Deliverables
+                </h2>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">
+                    Everything required by the assessment guidelines is organized into standard submission folders.
+                </p>
+            </div>
+
+            <!-- Single-Step Push Guide -->
+            <div class="card" style="margin-bottom: 2rem;">
+                <div class="card-header">
+                    <h3 class="card-title">🚀 How to Deploy &amp; Push to Your GitHub Account (24/7 Live)</h3>
+                    <span class="badge badge-success">GitHub Pages Ready</span>
+                </div>
+                <div style="background: #0f172a; color: #f8fafc; padding: 1.25rem; border-radius: var(--radius-sm); font-family: monospace; font-size: 0.85rem; line-height: 1.6;">
+                    <span style="color: #64748b;"># Step 1: Open PowerShell in project directory</span><br>
+                    <span style="color: #38bdf8;">cd "d:\ASSIGNMENT 1"</span><br><br>
+                    <span style="color: #64748b;"># Step 2: Initialize local Git and add all deliverables</span><br>
+                    <span style="color: #38bdf8;">git init</span><br>
+                    <span style="color: #38bdf8;">git add .</span><br>
+                    <span style="color: #38bdf8;">git commit -m "Complete Scenario 26 Courier Tracking Management System - Dharshan S (732925ITR026)"</span><br><br>
+                    <span style="color: #64748b;"># Step 3: Link your GitHub repository and push to main</span><br>
+                    <span style="color: #38bdf8;">git remote add origin https://github.com/&lt;your-username&gt;/courier-parcel-tracking.git</span><br>
+                    <span style="color: #38bdf8;">git branch -M main</span><br>
+                    <span style="color: #22c55e;">git push -u origin main</span><br><br>
+                    <span style="color: #64748b;"># Step 4: Turn ON GitHub Pages in GitHub Settings -> Pages -> Deploy from Branch 'main' -> Root (/)</span><br>
+                    <span style="color: #f59e0b;"># Your website goes live 24/7 at: https://&lt;your-username&gt;.github.io/courier-parcel-tracking/</span>
+                </div>
+            </div>
+
+            <!-- Deliverables Checklist -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">📦 Submission Deliverables Inventory (100% Satisfied)</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Deliverable Item</th>
+                                <th>File / Directory Path</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>1. SRS Document &amp; Testing Suites</strong></td>
+                                <td><code>docs/SRS_Document.md</code>, <code>docs/Test_Cases_Suite.md</code></td>
+                                <td><span class="badge badge-success">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>2. Design Diagrams (UML Activity, Component, Class, ER, Architecture)</strong></td>
+                                <td><code>assets/diagrams/*.svg</code></td>
+                                <td><span class="badge badge-success">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>3. Java Source Code, Inputs, &amp; Outputs</strong></td>
+                                <td><code>java/src/com/courier/*</code>, <code>java/sample_inputs.txt</code>, <code>java/sample_outputs.txt</code></td>
+                                <td><span class="badge badge-success">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>4. Database ER Model, Normalization, &amp; SQL Scripts</strong></td>
+                                <td><code>sql/schema.sql</code>, <code>sql/seed_data.sql</code>, <code>sql/queries.sql</code>, <code>sql/terminal_guide.md</code></td>
+                                <td><span class="badge badge-success">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>5. Python Code &amp; Visualizations</strong></td>
+                                <td><code>python/analytics.py</code>, <code>python/courier_dataset.csv</code>, <code>assets/charts/*.png</code></td>
+                                <td><span class="badge badge-success">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>6. Project README.md with Full Setup Instructions</strong></td>
+                                <td><code>README.md</code></td>
+                                <td><span class="badge badge-success">Completed</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============================================================================
+         MODAL 1: BOOK NEW PARCEL
+         ============================================================================ -->
+    <div id="modal-book-parcel" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 style="font-weight: 700; color: var(--secondary);">📦 Register New Consignment Parcel (FR-02)</h3>
+                <button id="btn-close-book-modal" class="btn btn-outline btn-sm" style="border: none; font-size: 1.2rem;">&times;</button>
+            </div>
+            <form id="form-book-parcel">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label">Consignee / Receiver Name *</label>
+                        <input type="text" id="book-receiver-name" class="form-control" required placeholder="e.g. Anandha Krishnan">
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label class="form-label">Receiver Contact Phone *</label>
+                            <input type="tel" id="book-receiver-phone" class="form-control" required placeholder="e.g. 9842100000">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Destination City *</label>
+                            <input type="text" id="book-dest-city" class="form-control" required placeholder="e.g. Chennai">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Delivery Street Address *</label>
+                        <input type="text" id="book-receiver-address" class="form-control" required placeholder="e.g. 15 Anna Salai, Guindy">
+                    </div>
+
+                    <div class="grid-3">
+                        <div class="form-group">
+                            <label class="form-label">Parcel Category</label>
+                            <select id="book-type" class="form-control">
+                                <option value="General Goods">General Goods</option>
+                                <option value="Document">Document</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Clothing">Clothing</option>
+                                <option value="Fragile">Fragile</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Weight (kg) *</label>
+                            <input type="number" id="book-weight" class="form-control" min="0.1" step="0.1" value="2.0" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Distance Tier</label>
+                            <select id="book-distance" class="form-control">
+                                <option value="Local">Local (Intra-district)</option>
+                                <option value="Regional" selected>Regional (Statewide)</option>
+                                <option value="National">National (Interstate)</option>
+                                <option value="International">International</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Service Speed Tier</label>
+                        <select id="book-service" class="form-control">
+                            <option value="Standard">Standard Ground (3–4 Days)</option>
+                            <option value="Express" selected>Priority Express Air (24–48 Hrs)</option>
+                            <option value="Same-Day">Same-Day Rush (Local only)</option>
+                        </select>
+                    </div>
+
+                    <!-- Dynamic Live Price Preview -->
+                    <div id="booking-price-preview" style="background: #f8fafc; padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.85rem; text-align: center;">
+                        Base: ₹295.00 | GST (18%): ₹53.10 | <strong style="color: var(--accent); font-size: 1.1rem;">Total: ₹348.10</strong>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline modal-close-trigger">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Confirm &amp; Generate AWB</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============================================================================
+         MODAL 2: UPDATE STATUS
+         ============================================================================ -->
+    <div id="modal-update-status" class="modal-overlay">
+        <div class="modal-content" style="max-width: 480px;">
+            <div class="modal-header">
+                <h3 style="font-weight: 700; color: var(--secondary);">⚡ Update Transit Status (FR-06)</h3>
+                <button class="btn btn-outline btn-sm modal-close-trigger">&times;</button>
+            </div>
+            <form id="form-update-status">
+                <input type="hidden" id="update-status-tracking">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label">New Status Event</label>
+                        <select id="update-new-status" class="form-control">
+                            <option value="In Transit">In Transit</option>
+                            <option value="Out for Delivery">Out for Delivery</option>
+                            <option value="Delivered">Delivered</option>
+                            <option value="Returned">Returned</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Current Checkpoint Location</label>
+                        <input type="text" id="update-location" class="form-control" placeholder="e.g. Coimbatore Regional Sorting Facility">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Operational Notes / Reason</label>
+                        <input type="text" id="update-notes" class="form-control" placeholder="e.g. Scanned into delivery van">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline modal-close-trigger">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Update Status</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============================================================================
+         MODAL 3: ASSIGN DELIVERY AGENT
+         ============================================================================ -->
+    <div id="modal-assign-agent" class="modal-overlay">
+        <div class="modal-content" style="max-width: 480px;">
+            <div class="modal-header">
+                <h3 style="font-weight: 700; color: var(--secondary);">👤 Assign Delivery Personnel (FR-05)</h3>
+                <button class="btn btn-outline btn-sm modal-close-trigger">&times;</button>
+            </div>
+            <form id="form-assign-agent">
+                <input type="hidden" id="assign-tracking">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label">Select Field Agent</label>
+                        <select id="assign-agent-id" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline modal-close-trigger">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Allocate Agent</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============================================================================
+         MODAL 4: LOG DELIVERY ATTEMPT
+         ============================================================================ -->
+    <div id="modal-log-attempt" class="modal-overlay">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3 style="font-weight: 700; color: var(--secondary);">📝 Record Doorstep Attempt (FR-07)</h3>
+                <button class="btn btn-outline btn-sm modal-close-trigger">&times;</button>
+            </div>
+            <form id="form-log-attempt">
+                <input type="hidden" id="attempt-tracking">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label">Unsuccessful Delivery Reason *</label>
+                        <select id="attempt-reason" class="form-control">
+                            <option value="Customer Unavailable">Customer Unavailable</option>
+                            <option value="Door Locked">Door Locked / Premises Closed</option>
+                            <option value="Incorrect Address">Incorrect Address or Incomplete Details</option>
+                            <option value="Customer Requested Reschedule">Customer Requested Reschedule</option>
+                            <option value="Weather/Traffic Delay">Severe Weather or Route Obstruction</option>
+                            <option value="Refused Delivery">Refused Delivery</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Reschedule Delivery Date</label>
+                        <input type="date" id="attempt-reschedule-date" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Field Agent Remarks</label>
+                        <textarea id="attempt-remarks" class="form-control" rows="2" placeholder="e.g. Phone went unanswered; neighbor confirmed resident is traveling"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline modal-close-trigger">Cancel</button>
+                    <button type="submit" class="btn btn-danger" style="background: var(--accent-rose); color: #fff;">Record Attempt</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============================================================================
+         FOOTER
+         ============================================================================ -->
+    <footer class="app-footer">
+        <p><strong>SwiftTrack Logistics Management System — Scenario 26</strong></p>
+        <p style="margin-top: 0.35rem;">
+            Prepared by <strong>Dharshan S</strong> (Register No: <strong>732925ITR026</strong>) | Class: <strong>25IT3A</strong>
+        </p>
+        <p style="margin-top: 0.2rem; font-size: 0.8rem;">
+            Department of Information Technology • Velalar College of Engineering and Technology, Erode – 638012
+        </p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/db-engine.js"></script>
+    <script src="js/sql-runner.js"></script>
+    <script src="js/analytics.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

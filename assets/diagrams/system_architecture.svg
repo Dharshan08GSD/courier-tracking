@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 620" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: 'Segoe UI', Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #1e293b; text-anchor: middle; }
+      .subtitle { font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; fill: #64748b; text-anchor: middle; }
+      .tier-box { stroke-width: 2; rx: 8; ry: 8; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.06)); }
+      .tier-title { font-family: 'Segoe UI', Arial, sans-serif; font-size: 15px; font-weight: bold; text-anchor: middle; }
+      .module-box { fill: #ffffff; stroke-width: 1.5; rx: 6; ry: 6; }
+      .module-text { font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; font-weight: 600; fill: #1e293b; text-anchor: middle; }
+      .module-sub { font-family: 'Segoe UI', Arial, sans-serif; font-size: 11px; fill: #64748b; text-anchor: middle; }
+      .arrow { stroke: #0284c7; stroke-width: 2.2; fill: none; marker-end: url(#arch-arrow); }
+      .protocol-text { font-family: 'Consolas', monospace; font-size: 11px; font-weight: bold; fill: #0369a1; text-anchor: middle; }
+    </style>
+    <marker id="arch-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <polygon points="0 1, 8 4, 0 7" fill="#0284c7" />
+    </marker>
+  </defs>
+
+  <!-- Title & Metadata -->
+  <text x="475" y="32" class="title">System Architecture: 3-Tier Multi-Module Courier Platform</text>
+  <text x="475" y="55" class="subtitle">Scenario 26 | Student: Dharshan S (732925ITR026) | Class: 25IT3A | VCET IT</text>
+
+  <!-- ================= TIER 1: PRESENTATION TIER ================= -->
+  <rect x="50" y="80" width="850" height="135" class="tier-box" fill="#eff6ff" stroke="#3b82f6" />
+  <text x="475" y="105" class="tier-title" fill="#1d4ed8">1. PRESENTATION TIER (Web Client &amp; Interactive UI)</text>
+
+  <rect x="75" y="120" width="180" height="75" class="module-box" stroke="#3b82f6" />
+  <text x="165" y="145" class="module-text">Consignment Tracker</text>
+  <text x="165" y="165" class="module-sub">Real-Time Timeline</text>
+  <text x="165" y="180" class="module-sub">Waybill Viewer</text>
+
+  <rect x="280" y="120" width="180" height="75" class="module-box" stroke="#3b82f6" />
+  <text x="370" y="145" class="module-text">Booking &amp; Calculator</text>
+  <text x="370" y="165" class="module-sub">Dynamic Pricing UI</text>
+  <text x="370" y="180" class="module-sub">Auto-Tracking No.</text>
+
+  <rect x="485" y="120" width="180" height="75" class="module-box" stroke="#3b82f6" />
+  <text x="575" y="145" class="module-text">Dispatch &amp; Attempts</text>
+  <text x="575" y="165" class="module-sub">Agent Allocation</text>
+  <text x="575" y="180" class="module-sub">Failure Logger</text>
+
+  <rect x="690" y="120" width="185" height="75" class="module-box" stroke="#3b82f6" />
+  <text x="782" y="145" class="module-text">Data Science Dashboards</text>
+  <text x="782" y="165" class="module-sub">Chart.js Live Analytics</text>
+  <text x="782" y="180" class="module-sub">SLA Delay Matrices</text>
+
+  <!-- Connectors Tier 1 to Tier 2 -->
+  <line x1="260" y1="215" x2="260" y2="255" class="arrow" />
+  <text x="260" y="240" class="protocol-text">JSON / REST</text>
+
+  <line x1="680" y1="215" x2="680" y2="255" class="arrow" />
+  <text x="680" y="240" class="protocol-text">WebAssembly / RPC</text>
+
+  <!-- ================= TIER 2: BUSINESS LOGIC TIER ================= -->
+  <rect x="50" y="260" width="850" height="150" class="tier-box" fill="#f0fdf4" stroke="#22c55e" />
+  <text x="475" y="285" class="tier-title" fill="#15803d">2. APPLICATION &amp; BUSINESS LOGIC TIER (Java &amp; Python Engines)</text>
+
+  <rect x="75" y="305" width="180" height="85" class="module-box" stroke="#22c55e" />
+  <text x="165" y="328" class="module-text">Java Domain Model</text>
+  <text x="165" y="348" class="module-sub">Inheritance: Standard/</text>
+  <text x="165" y="363" class="module-sub">Express / SameDay</text>
+  <text x="165" y="378" class="module-sub">Custom Exceptions</text>
+
+  <rect x="280" y="305" width="180" height="85" class="module-box" stroke="#22c55e" />
+  <text x="370" y="328" class="module-text">Multithreaded Dispatcher</text>
+  <text x="370" y="348" class="module-sub">Concurrent Workers</text>
+  <text x="370" y="363" class="module-sub">Thread Priorities</text>
+  <text x="370" y="378" class="module-sub">Synchronized Updates</text>
+
+  <rect x="485" y="305" width="180" height="85" class="module-box" stroke="#22c55e" />
+  <text x="575" y="328" class="module-text">Pricing Engine</text>
+  <text x="575" y="348" class="module-sub">Weight Multipliers</text>
+  <text x="575" y="363" class="module-sub">Distance Category Rate</text>
+  <text x="575" y="378" class="module-sub">GST Calculation</text>
+
+  <rect x="690" y="305" width="185" height="85" class="module-box" stroke="#22c55e" />
+  <text x="782" y="328" class="module-text">Python Analytics Engine</text>
+  <text x="782" y="348" class="module-sub">Pandas &amp; NumPy Cleaning</text>
+  <text x="782" y="363" class="module-sub">IQR Outlier Detection</text>
+  <text x="782" y="378" class="module-sub">Seaborn / Matplotlib</text>
+
+  <!-- Connectors Tier 2 to Tier 3 -->
+  <line x1="260" y1="410" x2="260" y2="450" class="arrow" />
+  <text x="260" y="435" class="protocol-text">JDBC / SQL</text>
+
+  <line x1="680" y1="410" x2="680" y2="450" class="arrow" />
+  <text x="680" y="435" class="protocol-text">SQLAlchemy / CSV</text>
+
+  <!-- ================= TIER 3: PERSISTENCE & DATABASE TIER ================= -->
+  <rect x="50" y="455" width="850" height="135" class="tier-box" fill="#faf5ff" stroke="#a855f7" />
+  <text x="475" y="480" class="tier-title" fill="#7e22ce">3. DATA PERSISTENCE &amp; STORAGE TIER (DBMS 25ITT31)</text>
+
+  <rect x="85" y="495" width="220" height="75" class="module-box" stroke="#a855f7" />
+  <text x="195" y="520" class="module-text">MySQL Relational DB</text>
+  <text x="195" y="540" class="module-sub">3NF Normalized Schema</text>
+  <text x="195" y="555" class="module-sub">Triggers &amp; Views</text>
+
+  <rect x="365" y="495" width="220" height="75" class="module-box" stroke="#a855f7" />
+  <text x="475" y="520" class="module-text">Client-Side Engine</text>
+  <text x="475" y="540" class="module-sub">LocalStorage / IndexedDB</text>
+  <text x="475" y="555" class="module-sub">Zero-Latency State</text>
+
+  <rect x="645" y="495" width="220" height="75" class="module-box" stroke="#a855f7" />
+  <text x="755" y="520" class="module-text">Interactive SQL Terminal</text>
+  <text x="755" y="540" class="module-sub">In-Browser Query Engine</text>
+  <text x="755" y="555" class="module-sub">ASCII Formatted Output</text>
+</svg>

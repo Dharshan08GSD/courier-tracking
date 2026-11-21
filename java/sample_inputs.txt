@@ -1,0 +1,44 @@
+================================================================================
+SAMPLE INPUTS FOR TESTING THE COURIER SYSTEM (25ITT32)
+Student: Dharshan S | Reg: 732925ITR026 | Class: 25IT3A
+================================================================================
+
+Test Case 1: Search Existing Consignment
+Selection: 1
+Tracking Number: TRK-2026-8801
+
+Test Case 2: Search Non-Existent Consignment (Exception Handling test)
+Selection: 1
+Tracking Number: TRK-2026-9999
+
+Test Case 3: Invalid Tracking Format (Regex Exception test)
+Selection: 1
+Tracking Number: INVALID-CODE-123
+
+Test Case 4: Book New Consignment
+Selection: 2
+Receiver Name: Senthil Velan
+Receiver Phone: 9876543210
+Receiver Address: 15 Thindal Medu, Perundurai Road
+Destination City: Erode
+Parcel Type: Electronics
+Weight: 3.5
+Distance Category: 1 (Local)
+Service Type: 2 (Priority Express)
+
+Test Case 5: List Pending Shipments
+Selection: 4
+
+Test Case 6: Assign Personnel
+Selection: 5
+Tracking Number: TRK-2026-8805
+Personnel ID: 1
+
+Test Case 7: Launch Multithreaded Transit Dispatch Simulator
+Selection: 6
+
+Test Case 8: View Analytical Summary
+Selection: 7
+
+Test Case 9: Exit
+Selection: 8

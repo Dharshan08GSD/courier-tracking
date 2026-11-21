@@ -1,0 +1,31 @@
+parcel_id,tracking_number,sender_name,receiver_name,destination_city,parcel_type,weight_kg,distance_category,service_type,base_charge,total_charge,current_status,booking_date,estimated_delivery,actual_delivery,delivery_agent,attempt_count,failure_reason,delay_hours
+1,TRK-2026-8801,Arun Kumar,Sangeetha R,Coimbatore,Document,0.50,Local,Standard,50.00,59.00,Delivered,2026-11-15 09:30:00,2026-11-16 18:00:00,2026-11-16 14:20:00,Sathish Kumar R,1,None,-3.67
+2,TRK-2026-8802,Deepa Mohan,Gokulnath C,Erode,General Goods,2.80,Local,Same-Day,180.00,212.40,Delivered,2026-11-16 10:15:00,2026-11-16 20:00:00,2026-11-16 19:40:00,Manojkumar P,1,None,-0.33
+3,TRK-2026-8803,Karthik Raja,Kavitha Devi,Chennai,Electronics,4.20,Regional,Express,420.00,495.60,Delivered,2026-11-17 11:00:00,2026-11-18 16:00:00,2026-11-18 15:10:00,Praveen Wilson,1,None,-0.83
+4,TRK-2026-8804,Priya Senthil,Balaji Krishnan,Salem,Clothing,1.80,Regional,Standard,140.00,165.20,Delivered,2026-11-17 14:00:00,2026-11-19 18:00:00,2026-11-19 12:30:00,Dinesh Velu,1,None,-5.50
+5,TRK-2026-8805,Dharshan S,Naveen Kumar,Bangalore,Electronics,6.50,National,Express,780.00,920.40,Out for Delivery,2026-11-19 09:00:00,2026-11-21 16:00:00,,Ganesh Moorthy,2,Customer Requested Reschedule,4.50
+6,TRK-2026-8806,Venkatesh M,Anitha Raghu,Tiruppur,Fragile,3.00,Local,Express,250.00,295.00,In Transit,2026-11-20 08:30:00,2026-11-21 17:00:00,,Manojkumar P,0,None,0.00
+7,TRK-2026-8807,Lavanya N,Saravanan M,Madurai,General Goods,8.20,Regional,Standard,380.00,448.40,In Transit,2026-11-20 11:20:00,2026-11-22 18:00:00,,Sathish Kumar R,0,None,0.00
+8,TRK-2026-8808,Suresh Babu,Harish Shankar,Bangalore,Document,0.30,National,Express,220.00,259.60,Out for Delivery,2026-11-20 12:00:00,2026-11-21 15:00:00,,Ganesh Moorthy,1,None,0.00
+9,TRK-2026-8809,Deepa Mohan,Revathi Sundar,Erode,Clothing,1.50,Local,Same-Day,150.00,177.00,Out for Delivery,2026-11-21 07:30:00,2026-11-21 14:00:00,,Manojkumar P,1,None,0.00
+10,TRK-2026-8810,Meenakshi S,Murugan K,Tirunelveli,Fragile,5.00,Regional,Standard,320.00,377.60,Booked,2026-11-21 08:45:00,2026-11-23 18:00:00,,None,0,None,0.00
+11,TRK-2026-8811,Rajesh Kannan,Divya Prakash,Trichy,Electronics,3.80,Regional,Express,390.00,460.20,Returned,2026-11-16 10:00:00,2026-11-18 17:00:00,,Dinesh Velu,2,Customer Unavailable,12.00
+12,TRK-2026-8812,Dharshan S,Raghavan V,Chennai,Document,0.40,Regional,Express,180.00,212.40,Booked,2026-11-21 09:15:00,2026-11-22 17:00:00,,None,0,None,0.00
+13,TRK-2026-8813,Arun Kumar,Maheshwaran,Coimbatore,General Goods,4.50,Local,Standard,160.00,188.80,Delivered,2026-11-15 11:00:00,2026-11-16 18:00:00,2026-11-16 16:45:00,Sathish Kumar R,1,None,-1.25
+14,TRK-2026-8814,Karthik Raja,Subash Chandra,Bangalore,Clothing,2.20,National,Standard,260.00,306.80,Delivered,2026-11-16 12:00:00,2026-11-19 17:00:00,2026-11-19 14:10:00,Ganesh Moorthy,1,None,-2.83
+15,TRK-2026-8815,Priya Senthil,Gayathri S,Erode,Document,0.25,Local,Express,90.00,106.20,Delivered,2026-11-17 08:30:00,2026-11-17 18:00:00,2026-11-17 17:15:00,Manojkumar P,1,None,-0.75
+16,TRK-2026-8816,Venkatesh M,Prabhu R,Salem,Electronics,5.10,Regional,Express,450.00,531.00,Delivered,2026-11-17 15:45:00,2026-11-18 19:00:00,2026-11-18 18:30:00,Dinesh Velu,1,None,-0.50
+17,TRK-2026-8817,Lavanya N,Hema Malini,Chennai,Fragile,2.70,Regional,Standard,220.00,259.60,Delivered,2026-11-18 10:00:00,2026-11-20 18:00:00,2026-11-20 16:50:00,Praveen Wilson,1,None,-1.17
+18,TRK-2026-8818,Suresh Babu,Vijayalakshmi,Tiruppur,General Goods,3.90,Local,Standard,140.00,165.20,Delivered,2026-11-18 13:10:00,2026-11-19 17:00:00,2026-11-19 15:40:00,Sathish Kumar R,1,None,-1.33
+19,TRK-2026-8819,Meenakshi S,Kannan P,Madurai,Clothing,1.90,Regional,Express,210.00,247.80,Delivered,2026-11-19 09:20:00,2026-11-20 16:00:00,2026-11-20 15:00:00,Sathish Kumar R,1,None,-1.00
+20,TRK-2026-8820,Rajesh Kannan,Sridhar V,Erode,Document,0.35,Local,Same-Day,110.00,129.80,Delivered,2026-11-19 10:30:00,2026-11-19 19:00:00,2026-11-19 18:10:00,Manojkumar P,1,None,-0.83
+21,TRK-2026-8821,Dharshan S,Senthilkumar,Coimbatore,Fragile,6.00,Local,Express,350.00,413.00,Delivered,2026-11-19 14:00:00,2026-11-20 17:00:00,2026-11-20 18:45:00,Sathish Kumar R,1,None,1.75
+22,TRK-2026-8822,Arun Kumar,Nandhini K,Salem,Electronics,7.20,Regional,Express,580.00,684.40,Delivered,2026-11-20 09:00:00,2026-11-21 14:00:00,2026-11-21 16:15:00,Dinesh Velu,1,Weather/Traffic Delay,2.25
+23,TRK-2026-8823,Deepa Mohan,Vasanth R,Bangalore,General Goods,4.10,National,Standard,340.00,401.20,In Transit,2026-11-20 11:45:00,2026-11-22 18:00:00,,Ganesh Moorthy,0,None,0.00
+24,TRK-2026-8824,Karthik Raja,Preethi M,Trichy,Clothing,2.40,Regional,Standard,190.00,224.20,In Transit,2026-11-20 14:30:00,2026-11-22 17:00:00,,Dinesh Velu,0,None,0.00
+25,TRK-2026-8825,Priya Senthil,Dhanapal T,Chennai,Document,0.60,Regional,Express,170.00,200.60,In Transit,2026-11-20 16:00:00,2026-11-21 18:00:00,,Praveen Wilson,0,None,0.00
+26,TRK-2026-8826,Venkatesh M,Geetha S,Erode,Fragile,3.50,Local,Same-Day,210.00,247.80,Out for Delivery,2026-11-21 08:00:00,2026-11-21 14:00:00,,Manojkumar P,1,None,0.00
+27,TRK-2026-8827,Lavanya N,Ramesh P,Coimbatore,Electronics,8.50,Local,Express,480.00,566.40,Out for Delivery,2026-11-21 08:30:00,2026-11-21 15:00:00,,Sathish Kumar R,1,None,0.00
+28,TRK-2026-8828,Suresh Babu,Swaminathan,Madurai,General Goods,12.00,Regional,Standard,520.00,613.60,Booked,2026-11-21 09:00:00,2026-11-23 18:00:00,,None,0,None,0.00
+29,TRK-2026-8829,Meenakshi S,Aravind B,Tirunelveli,Clothing,3.10,Regional,Express,310.00,365.80,Booked,2026-11-21 09:30:00,2026-11-22 17:00:00,,None,0,None,0.00
+30,TRK-2026-8830,Rajesh Kannan,Sankar M,Bangalore,Fragile,4.80,National,Express,620.00,731.60,Booked,2026-11-21 10:00:00,2026-11-23 16:00:00,,None,0,None,0.00

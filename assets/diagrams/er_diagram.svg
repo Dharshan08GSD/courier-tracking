@@ -1,0 +1,183 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 950" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: 'Segoe UI', Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #1e293b; text-anchor: middle; }
+      .subtitle { font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; fill: #64748b; text-anchor: middle; }
+      .entity-rect { fill: #a7f3d0; stroke: #059669; stroke-width: 2.2; }
+      .entity-text { font-family: 'Segoe UI', Arial, sans-serif; font-size: 15px; font-weight: bold; fill: #064e3b; text-anchor: middle; dominant-baseline: central; }
+      .relation-diamond { fill: #fed7aa; stroke: #ea580c; stroke-width: 2.2; }
+      .relation-text { font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; font-weight: 600; fill: #7c2d12; text-anchor: middle; dominant-baseline: central; }
+      .attr-oval { fill: #e0f2fe; stroke: #0284c7; stroke-width: 1.6; }
+      .attr-text { font-family: 'Segoe UI', Arial, sans-serif; font-size: 11px; fill: #0c4a6e; text-anchor: middle; dominant-baseline: central; }
+      .pk-text { font-family: 'Segoe UI', Arial, sans-serif; font-size: 11px; font-weight: bold; fill: #0c4a6e; text-anchor: middle; dominant-baseline: central; text-decoration: underline; }
+      .link { stroke: #475569; stroke-width: 1.8; fill: none; }
+      .cardinality { font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #dc2626; }
+    </style>
+  </defs>
+
+  <!-- Title & Metadata -->
+  <text x="500" y="32" class="title">Chen's Entity-Relationship (ER) Diagram</text>
+  <text x="500" y="55" class="subtitle">Scenario 26: Courier and Parcel Tracking Management System | Student: Dharshan S (732925ITR026) | 25IT3A</text>
+
+  <!-- ================= TOP: CUSTOMER ENTITY ================= -->
+  <!-- Entity: CUSTOMER -->
+  <rect x="420" y="130" width="160" height="50" class="entity-rect" />
+  <text x="500" y="155" class="entity-text">CUSTOMER</text>
+
+  <!-- Attributes of CUSTOMER -->
+  <!-- customer_id (PK) -->
+  <ellipse cx="260" cy="95" rx="55" ry="22" class="attr-oval" />
+  <text x="260" y="95" class="pk-text">customer_id</text>
+  <line x1="315" y1="95" x2="420" y2="135" class="link" />
+
+  <!-- name -->
+  <ellipse cx="280" cy="165" rx="45" ry="20" class="attr-oval" />
+  <text x="280" y="165" class="attr-text">name</text>
+  <line x1="325" y1="165" x2="420" y2="155" class="link" />
+
+  <!-- phone -->
+  <ellipse cx="400" cy="80" rx="45" ry="20" class="attr-oval" />
+  <text x="400" y="80" class="attr-text">phone</text>
+  <line x1="410" y1="100" x2="450" y2="130" class="link" />
+
+  <!-- email -->
+  <ellipse cx="600" cy="80" rx="45" ry="20" class="attr-oval" />
+  <text x="600" y="80" class="attr-text">email</text>
+  <line x1="590" y1="100" x2="550" y2="130" class="link" />
+
+  <!-- city & address -->
+  <ellipse cx="720" cy="95" rx="45" ry="20" class="attr-oval" />
+  <text x="720" y="95" class="attr-text">city</text>
+  <line x1="675" y1="105" x2="580" y2="140" class="link" />
+
+  <ellipse cx="720" cy="165" rx="50" ry="20" class="attr-oval" />
+  <text x="720" y="165" class="attr-text">address</text>
+  <line x1="670" y1="165" x2="580" y2="155" class="link" />
+
+  <!-- ================= RELATIONSHIP: BOOKS ================= -->
+  <line x1="500" y1="180" x2="500" y2="250" class="link" />
+  <text x="510" y="210" class="cardinality">1</text>
+
+  <polygon points="500,250 560,285 500,320 440,285" class="relation-diamond" />
+  <text x="500" y="285" class="relation-text">Books</text>
+
+  <line x1="500" y1="320" x2="500" y2="390" class="link" />
+  <text x="510" y="360" class="cardinality">N</text>
+
+  <!-- ================= CENTER: PARCEL ENTITY ================= -->
+  <!-- Entity: PARCEL -->
+  <rect x="420" y="390" width="160" height="55" class="entity-rect" />
+  <text x="500" y="417" class="entity-text">PARCEL</text>
+
+  <!-- Attributes of PARCEL -->
+  <!-- parcel_id (PK) -->
+  <ellipse cx="250" cy="360" rx="50" ry="22" class="attr-oval" />
+  <text x="250" y="360" class="pk-text">parcel_id</text>
+  <line x1="300" y1="365" x2="420" y2="400" class="link" />
+
+  <!-- tracking_number (Unique) -->
+  <ellipse cx="220" cy="425" rx="65" ry="22" class="attr-oval" />
+  <text x="220" y="425" class="attr-text">tracking_number</text>
+  <line x1="285" y1="425" x2="420" y2="417" class="link" />
+
+  <!-- weight_kg -->
+  <ellipse cx="250" cy="490" rx="45" ry="20" class="attr-oval" />
+  <text x="250" y="490" class="attr-text">weight_kg</text>
+  <line x1="295" y1="485" x2="420" y2="435" class="link" />
+
+  <!-- total_charge -->
+  <ellipse cx="740" cy="360" rx="50" ry="20" class="attr-oval" />
+  <text x="740" y="360" class="attr-text">total_charge</text>
+  <line x1="690" y1="365" x2="580" y2="400" class="link" />
+
+  <!-- current_status -->
+  <ellipse cx="760" cy="425" rx="55" ry="22" class="attr-oval" />
+  <text x="760" y="425" class="attr-text">current_status</text>
+  <line x1="705" y1="425" x2="580" y2="417" class="link" />
+
+  <!-- destination_city -->
+  <ellipse cx="740" cy="490" rx="60" ry="20" class="attr-oval" />
+  <text x="740" y="490" class="attr-text">destination_city</text>
+  <line x1="680" y1="485" x2="580" y2="435" class="link" />
+
+  <!-- ================= RIGHT-SIDE: DELIVERY PERSONNEL ================= -->
+  <!-- Relationship: Assigned To -->
+  <line x1="580" y1="417" x2="680" y2="580" class="link" />
+  <text x="615" y="465" class="cardinality">N</text>
+
+  <!-- ================= BOTTOM BRANCHES (3-WAY SPLIT) ================= -->
+
+  <!-- Relationship 1: Assigned To (Right) -->
+  <polygon points="730,550 790,580 730,610 670,580" class="relation-diamond" />
+  <text x="730" y="580" class="relation-text">Assigned</text>
+
+  <line x1="790" y1="580" x2="850" y2="580" class="link" />
+  <text x="815" y="570" class="cardinality">1</text>
+
+  <!-- Entity: DELIVERY_PERSONNEL -->
+  <rect x="850" y="555" width="140" height="50" class="entity-rect" />
+  <text x="920" y="580" class="entity-text" font-size="13">PERSONNEL</text>
+
+  <!-- Personnel attributes -->
+  <ellipse cx="920" cy="495" rx="50" ry="20" class="attr-oval" />
+  <text x="920" y="495" class="pk-text">personnel_id</text>
+  <line x1="920" y1="515" x2="920" y2="555" class="link" />
+
+  <ellipse cx="920" cy="660" rx="45" ry="20" class="attr-oval" />
+  <text x="920" y="660" class="attr-text">assigned_zone</text>
+  <line x1="920" y1="605" x2="920" y2="640" class="link" />
+
+  <!-- Relationship 2: Has History / Audits (Center Down) -->
+  <line x1="500" y1="445" x2="500" y2="540" class="link" />
+  <text x="510" y="480" class="cardinality">1</text>
+
+  <polygon points="500,540 560,575 500,610 440,575" class="relation-diamond" />
+  <text x="500" y="575" class="relation-text">Records</text>
+
+  <line x1="500" y1="610" x2="500" y2="700" class="link" />
+  <text x="510" y="650" class="cardinality">N</text>
+
+  <!-- Entity: TRACKING_HISTORY -->
+  <rect x="410" y="700" width="180" height="50" class="entity-rect" />
+  <text x="500" y="725" class="entity-text">TRACKING_LOG</text>
+
+  <!-- Tracking History Attributes -->
+  <ellipse cx="330" cy="780" rx="45" ry="20" class="attr-oval" />
+  <text x="330" y="780" class="pk-text">update_id</text>
+  <line x1="365" y1="765" x2="430" y2="745" class="link" />
+
+  <ellipse cx="500" cy="800" rx="45" ry="20" class="attr-oval" />
+  <text x="500" y="800" class="attr-text">location</text>
+  <line x1="500" y1="750" x2="500" y2="780" class="link" />
+
+  <ellipse cx="660" cy="780" rx="45" ry="20" class="attr-oval" />
+  <text x="660" y="780" class="attr-text">timestamp</text>
+  <line x1="625" y1="765" x2="570" y2="745" class="link" />
+
+  <!-- Relationship 3: Experiences (Left Down) -->
+  <line x1="420" y1="420" x2="230" y2="550" class="link" />
+  <text x="290" y="465" class="cardinality">1</text>
+
+  <polygon points="230,550 290,580 230,610 170,580" class="relation-diamond" />
+  <text x="230" y="580" class="relation-text">Logs</text>
+
+  <line x1="230" y1="610" x2="230" y2="700" class="link" />
+  <text x="240" y="650" class="cardinality">N</text>
+
+  <!-- Entity: DELIVERY_ATTEMPT -->
+  <rect x="140" y="700" width="180" height="50" class="entity-rect" />
+  <text x="230" y="725" class="entity-text">DELIVERY_ATTEMPT</text>
+
+  <!-- Delivery Attempt Attributes -->
+  <ellipse cx="90" cy="780" rx="45" ry="20" class="attr-oval" />
+  <text x="90" y="780" class="pk-text">attempt_id</text>
+  <line x1="120" y1="765" x2="160" y2="745" class="link" />
+
+  <ellipse cx="210" cy="810" rx="55" ry="20" class="attr-oval" />
+  <text x="210" y="810" class="attr-text">failure_reason</text>
+  <line x1="215" y1="750" x2="215" y2="790" class="link" />
+
+  <ellipse cx="140" cy="870" rx="55" ry="20" class="attr-oval" />
+  <text x="140" y="870" class="attr-text">reschedule_date</text>
+  <line x1="160" y1="850" x2="190" y2="750" class="link" />
+</svg>

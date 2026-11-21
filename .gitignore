@@ -1,0 +1,28 @@
+# Operating System Files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# Java Build Artifacts
+*.class
+bin/
+*.jar
+*.war
+*.ear
+
+# Python Environment
+__pycache__/
+*.py[cod]
+*$py.class
+*.env
+.venv
+env/
+venv/
+ENV/
+
+# Database Local Instances
+*.db
+*.sqlite3
+*.log

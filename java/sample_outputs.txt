@@ -1,0 +1,62 @@
+================================================================================
+SAMPLE OUTPUTS FOR COURIER MANAGEMENT SYSTEM (25ITT32)
+Student: Dharshan S | Reg: 732925ITR026 | Class: 25IT3A
+================================================================================
+
+================================================================================
+      SWIFTTRACK: COURIER AND PARCEL TRACKING MANAGEMENT SYSTEM (SCENARIO 26)   
+================================================================================
+  Student: Dharshan S   | Reg No: 732925ITR026   | Class: 25IT3A               
+  Dept of Information Technology, Velalar College of Engineering and Technology 
+================================================================================
+
+--------------------------- OPERATIONAL DASHBOARD -----------------------------
+  1. Track Parcel by Tracking Number (e.g., TRK-2026-8801)
+  2. Register / Book a New Consignment Parcel
+  3. View All Parcels (Consignment Register)
+  4. View Pending Deliveries (Active Worklist)
+  5. Assign Delivery Personnel to Parcel
+  6. Launch Multithreaded Transit Dispatch Simulation (Unit 3)
+  7. View Analytics & Performance Metrics (Stream API - Unit 5)
+  8. Exit Application
+-------------------------------------------------------------------------------
+Select an option (1-8): 1
+
+Enter Consignment Tracking Number: TRK-2026-8801
+┌────────────────────────────────────────────────────────┐
+│ WAYBILL / CONSIGNMENT NOTE: TRK-2026-8801              │
+├────────────────────────────────────────────────────────┤
+│ Sender:   Arun Kumar (Coimbatore)                      │
+│ Receiver: Sangeetha R (Coimbatore)                     │
+│ Type:     Document        Weight: 0.50   kg            │
+│ Route:    Local           Service: Standard            │
+│ Total:    INR 59.00    (Tax Incl. 18% GST)             │
+│ Status:   Delivered                                    │
+└────────────────────────────────────────────────────────┘
+
+--- SHIPMENT AUDIT TRAIL / CHECKPOINTS ---
+ • [2026-11-21 10:45] Booked           @ Origin Sorting Hub, Erode    | Manifest created (System)
+ • [2026-11-21 10:46] Delivered        @ Recipient Address, Coimbatore| Delivered on schedule (Agent-Sathish)
+
+--------------------------- OPERATIONAL DASHBOARD -----------------------------
+Select an option (1-8): 6
+
+[SIMULATOR] Initializing Multithreaded Transit Dispatch Engine...
+[SIMULATOR] Spawning concurrent threads for active consignments...
+
+  [Thread-1] Processing Consignment: TRK-2026-8805 destined for Bangalore
+  [Thread-1] SUCCESS: TRK-2026-8805 is now OUT FOR DELIVERY.
+
+[SIMULATOR] All concurrent transit dispatches completed successfully!
+
+--------------------------- OPERATIONAL DASHBOARD -----------------------------
+Select an option (1-8): 7
+
+=================== SYSTEM ANALYTICS & REVENUE SUMMARY ====================
+ Total Registered Parcels: 5
+ Total Cumulative Revenue: ₹1853.40
+
+ Status Breakdown (Java 8 Streams groupingBy):
+   - Delivered          : 4 parcel(s)
+   - Out for Delivery   : 1 parcel(s)
+===========================================================================

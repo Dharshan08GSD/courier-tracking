@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 900" width="100%" height="100%">
+  <defs>
+    <style>
+      .title { font-family: 'Segoe UI', Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #1e293b; text-anchor: middle; }
+      .subtitle { font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; fill: #64748b; text-anchor: middle; }
+      .activity-box { fill: #38bdf8; stroke: #0284c7; stroke-width: 2; rx: 14; ry: 14; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+      .activity-text { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; font-weight: 600; fill: #0f172a; text-anchor: middle; dominant-baseline: central; }
+      .fork-join { fill: #0f172a; stroke: #0f172a; stroke-width: 1; rx: 3; ry: 3; }
+      .decision { fill: #38bdf8; stroke: #0284c7; stroke-width: 2; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+      .arrow { stroke: #0f172a; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .guard-text { font-family: 'Segoe UI', Arial, sans-serif; font-size: 12px; font-style: italic; font-weight: 600; fill: #334155; }
+      .start-node { fill: #0f172a; }
+      .end-outer { fill: none; stroke: #0f172a; stroke-width: 2.5; }
+      .end-inner { fill: #0f172a; }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <polygon points="0 1, 8 4, 0 7" fill="#0f172a" />
+    </marker>
+  </defs>
+
+  <!-- Title & Metadata -->
+  <text x="375" y="35" class="title">UML Activity Diagram: Courier Order &amp; Delivery Workflow</text>
+  <text x="375" y="60" class="subtitle">Scenario 26 | Student: Dharshan S (732925ITR026) | Class: 25IT3A | VCET IT</text>
+
+  <!-- Start Node -->
+  <circle cx="375" cy="95" r="14" class="start-node" />
+  <line x1="375" y1="109" x2="375" y2="135" class="arrow" />
+
+  <!-- Action: Receive Order / Booking -->
+  <rect x="275" y="135" width="200" height="50" class="activity-box" />
+  <text x="375" y="160" class="activity-text">Receive Booking Request</text>
+  <line x1="375" y1="185" x2="375" y2="215" class="arrow" />
+
+  <!-- Fork Bar (Synchronous Split) -->
+  <rect x="180" y="215" width="390" height="8" class="fork-join" />
+
+  <!-- Branch Left: Order Fulfillment & Transit -->
+  <line x1="230" y1="223" x2="230" y2="270" class="arrow" />
+  <rect x="140" y="270" width="180" height="50" class="activity-box" />
+  <text x="230" y="295" class="activity-text">Weigh &amp; Sort Parcel</text>
+  <line x1="230" y1="320" x2="230" y2="360" class="arrow" />
+
+  <!-- Decision Diamond: Rush / Service Type -->
+  <polygon points="230,360 270,390 230,420 190,390" class="decision" />
+  <text x="145" y="380" class="guard-text">[rush / express]</text>
+  <text x="280" y="380" class="guard-text">[standard]</text>
+
+  <!-- Left Decision Path: Express -->
+  <path d="M 190,390 L 115,390 L 115,465" class="arrow" />
+  <rect x="30" y="465" width="170" height="55" class="activity-box" />
+  <text x="115" y="485" class="activity-text">Arrange Priority Air /</text>
+  <text x="115" y="505" class="activity-text">Express Dispatch</text>
+
+  <!-- Right Decision Path: Regular -->
+  <path d="M 270,390 L 345,390 L 345,465" class="arrow" />
+  <rect x="260" y="465" width="170" height="55" class="activity-box" />
+  <text x="345" y="485" class="activity-text">Arrange Standard</text>
+  <text x="345" y="505" class="activity-text">Surface Delivery</text>
+
+  <!-- Merge Diamond -->
+  <path d="M 115,520 L 115,570 L 190,570" class="arrow" />
+  <path d="M 345,520 L 345,570 L 270,570" class="arrow" />
+  <polygon points="230,550 260,570 230,590 200,570" class="decision" />
+  <line x1="230" y1="590" x2="230" y2="675" class="arrow" />
+
+  <!-- Branch Right: Invoicing & Payment (Parallel to Left Branch) -->
+  <line x1="520" y1="223" x2="520" y2="310" class="arrow" />
+  <rect x="430" y="310" width="180" height="50" class="activity-box" />
+  <text x="520" y="335" class="activity-text">Generate Waybill &amp; Invoice</text>
+  <line x1="520" y1="360" x2="520" y2="465" class="arrow" />
+
+  <rect x="430" y="465" width="180" height="50" class="activity-box" />
+  <text x="520" y="490" class="activity-text">Collect Delivery Charge</text>
+  <line x1="520" y1="515" x2="520" y2="675" class="arrow" />
+
+  <!-- Join Bar (Synchronous Rendezvous) -->
+  <rect x="180" y="675" width="390" height="8" class="fork-join" />
+  <line x1="375" y1="683" x2="375" y2="720" class="arrow" />
+
+  <!-- Post-Join Action: Delivery Execution -->
+  <rect x="265" y="720" width="220" height="50" class="activity-box" />
+  <text x="375" y="745" class="activity-text">Dispatch to Doorstep &amp; Update Status</text>
+  <line x1="375" y1="770" x2="375" y2="815" class="arrow" />
+
+  <!-- End / Final Node -->
+  <circle cx="375" cy="830" r="16" class="end-outer" />
+  <circle cx="375" cy="830" r="10" class="end-inner" />
+</svg>
